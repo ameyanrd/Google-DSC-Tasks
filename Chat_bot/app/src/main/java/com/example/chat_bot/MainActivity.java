@@ -29,7 +29,7 @@ import java.util.List;
     private RecyclerView recyclerView;
     private RelativeLayout addBtn;
     private RecyclerView.Adapter adapter;
-    private List<ChatMessage> chatMessages,chatMessages1;
+    private List<ChatMessage> chatMessages;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference myref;
 
@@ -38,12 +38,11 @@ import java.util.List;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
-        etMessage = (EditText)findViewById(R.id.etMessage);
-        addBtn = (RelativeLayout)findViewById(R.id.addBtn);
+        recyclerView = findViewById(R.id.recyclerView);
+        etMessage = findViewById(R.id.etMessage);
+        addBtn = findViewById(R.id.addBtn);
         chatMessages = new ArrayList<>();
-        chatMessages1 = new ArrayList<>();
-
+        
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -53,15 +52,15 @@ import java.util.List;
         myref = firebaseDatabase.getReference();
         myref.keepSynced(true);
 
-        myref.child("chat").addValueEventListener(new ValueEventListener() {
+        myref.child("chat").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapShot: dataSnapshot.getChildren()){
                     ChatMessage chatMessage = postSnapShot.getValue(ChatMessage.class);
                     //Log.e("Get Data",chatMessage.getMessage());
-                    chatMessages1.add(chatMessage);
+                    chatMessages.add(chatMessage);
                 }
-                adapter = new MyAdapter(MainActivity.this, chatMessages1);
+                adapter = new MyAdapter(MainActivity.this, chatMessages);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -71,20 +70,21 @@ import java.util.List;
             }
         });
 
+        recyclerView.setAdapter(adapter);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String message = etMessage.getText().toString().trim();
 
-                if(!message.equals("")){
+//                if(!message.equals("")){
                     //Log.i("signal","Add Btn pressed!");
                     ChatMessage chatMessage = new ChatMessage(message, "user");
                     myref.child("chat").push().setValue(chatMessage);
                     chatMessages.add(chatMessage);
                     adapter = new MyAdapter(MainActivity.this, chatMessages);
                     recyclerView.setAdapter(adapter);
-                }
+//                }
                 etMessage.setText("");
                 Log.i("size",String.valueOf(chatMessages.size()));
                 Log.i("message",chatMessages.get(0).getMessage());
