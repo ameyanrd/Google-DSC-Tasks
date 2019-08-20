@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -34,6 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ChatMessage chatMessage = chatMessages.get(i);
+
         if (chatMessage.getUser().equals("user")) {
 
             viewHolder.rightText.setText(chatMessage.getMessage());
@@ -56,10 +58,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public TextView leftText,rightText;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             leftText = itemView.findViewById(R.id.leftText);
             rightText = itemView.findViewById(R.id.rightText);
+
         }
     }
 }
