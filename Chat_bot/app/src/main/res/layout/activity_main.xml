@@ -13,7 +13,7 @@
     android:paddingTop="10dp"
     android:paddingBottom="50dp"
     android:clipToPadding="false"
-    android:background="#f4f6f7"/>
+    android:background="#000000"/>
     
     <RelativeLayout
         android:id="@+id/rl1"
@@ -38,9 +38,9 @@
                     android:minHeight="50dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:background="#fff"
+                    android:background="@drawable/rounded_corner"
                     android:inputType="textCapSentences"
-                    android:hint="Type a Message"
+                    android:hint=" Type a Message"
                     android:textSize="18sp"/>
             </RelativeLayout>
 
