@@ -1,7 +1,6 @@
 package com.example.chat_bot;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.chatMessages = userProfiles;
     }
 
+    //First a view is created by inflating message layout
+    //Later a view a created fore this view and returned
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -32,6 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(v);
     }
 
+    //This function binds the data with the initialised viewholder elements
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         ChatMessage chatMessage = chatMessages.get(i);
@@ -48,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             viewHolder.leftText.setVisibility(View.VISIBLE);
         }
     }
-
+    // Returns the count of items pushed into the Recyclerview
     @Override
     public int getItemCount() {
         return chatMessages.size();
@@ -57,7 +59,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView leftText,rightText;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
