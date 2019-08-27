@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements AIListener{
             }
         });
 
-        // Onclick event is assigned with the addBtn recyclerview
+        // Onclick event is assigned with the addBtn Relative layout
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
